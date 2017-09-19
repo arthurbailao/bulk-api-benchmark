@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Bm;
+
+service Bulk {
+  rpc Load (stream Data) returns (Response) {}
+}
+
+message Data {
+  int32 index = 1;
+}
+
+message Response {
+  repeated int32 indices = 1;
+}

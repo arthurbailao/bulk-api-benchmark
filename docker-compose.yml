@@ -1,0 +1,22 @@
+grpc:
+  build: .
+  command: ["ruby", "server.rb"]
+  volumes:
+    - ./:/usr/src/app
+  ports:
+    - "50051"
+grape:
+  build: .
+  command: ["puma"]
+  volumes:
+    - ./:/usr/src/app
+  ports:
+    - "9292"
+bm:
+  build: .
+  entrypoint: ["ruby", "bm.rb"]
+  volumes:
+    - ./:/usr/src/app
+  links:
+    - grpc
+    - grape
